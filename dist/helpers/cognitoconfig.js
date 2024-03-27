@@ -32,27 +32,26 @@ const getCognitoUserList = () => __awaiter(void 0, void 0, void 0, function* () 
     };
     const command = new client_cognito_identity_provider_1.ListUsersCommand(input);
     const userList = (yield cognitoClient.send(command)).Users;
-    return userList || null;
-    //     let users: any = [];
-    //     const user = {
-    //         "email": cognitoUser.Attributes.find(atrr=>atrr.Name === 'email')?.Value || '',
-    //         "name": cognitoUser.Attributes.find(atrr=>atrr.Name === 'name')?.Value || '',
-    //         "flightID": "2398429832",
-    //         "CC": cognitoUser.Attributes.find(atrr=>atrr.Name === 'custom:CC')?.Value || '',
-    //         "IsInControlList": false,
-    //         "Tel": cognitoUser.Attributes.find(atrr=>atrr.Name === 'name')?.Value || '',
-    //         "lastLogin": "2024-04-25",
-    //         "Nationality": "Colombia",
-    //         "Birthday": "2004-04-20",
-    //         "EmergencyContact": cognitoUser.Attributes.find(atrr=>atrr.Name === 'custom:emergencyContact')?.Value || '',
-    //         "Occupation": cognitoUser.Attributes.find(atrr=>atrr.Name === 'name')?.Value || '',
-    //  }
-    //  users.push(retrievedUsers);
-    //     if (cognitoRes.Users){
-    //         cognitoRes.Users?.forEach(cognitoUser => {
-    //             if (cognitoUser.Attributes) {
-    //             }
-    //         })
-    //     }
+    let userResponse = [];
+    if (userList) {
+        userList.forEach(userRetrieved => {
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+            const userUpdated = {
+                "email": ((_b = (_a = userRetrieved.Attributes) === null || _a === void 0 ? void 0 : _a.find(atrr => atrr.Name === 'email')) === null || _b === void 0 ? void 0 : _b.Value) || '',
+                "name": ((_d = (_c = userRetrieved.Attributes) === null || _c === void 0 ? void 0 : _c.find(atrr => atrr.Name === 'name')) === null || _d === void 0 ? void 0 : _d.Value) || '',
+                "flightID": "2398429832",
+                "CC": ((_f = (_e = userRetrieved.Attributes) === null || _e === void 0 ? void 0 : _e.find(atrr => atrr.Name === 'custom:CC')) === null || _f === void 0 ? void 0 : _f.Value) || '',
+                "IsInControlList": false,
+                "Tel": ((_h = (_g = userRetrieved.Attributes) === null || _g === void 0 ? void 0 : _g.find(atrr => atrr.Name === 'name')) === null || _h === void 0 ? void 0 : _h.Value) || '',
+                "lastLogin": "2024-04-25",
+                "Nationality": "Colombia",
+                "Birthday": "2004-04-20",
+                "EmergencyContact": ((_k = (_j = userRetrieved.Attributes) === null || _j === void 0 ? void 0 : _j.find(atrr => atrr.Name === 'custom:emergencyContact')) === null || _k === void 0 ? void 0 : _k.Value) || '',
+                "Occupation": ((_m = (_l = userRetrieved.Attributes) === null || _l === void 0 ? void 0 : _l.find(atrr => atrr.Name === 'name')) === null || _m === void 0 ? void 0 : _m.Value) || '',
+            };
+            userResponse.push(userUpdated);
+        });
+    }
+    return userResponse || null;
 });
 exports.getCognitoUserList = getCognitoUserList;
